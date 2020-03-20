@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-const queryString = require('query-string');
+import queryString from 'query-string';
 
 export function getRoomName() {
   const parsed = queryString.parse(window.location.search);
