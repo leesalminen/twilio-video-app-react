@@ -66,6 +66,10 @@ This will start the local token server and run the app in the development mode. 
 The page will reload if you make changes to the source code in `src/`.
 You will also see any linting errors in the console.
 
+You may provide `user` and `room` as querystring parameters to automatically join a room with a user name:
+
+Example: https://video-app-1234-dev.twil.io/?passcode=12345678&room=my-room&user=my-name
+
 #### `npm run server`
 
 This will run a standalone token server.
