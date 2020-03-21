@@ -10,7 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Menu from './Menu/Menu';
 
 import { useAppState } from '../../state';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import { Typography } from '@material-ui/core';
@@ -40,15 +40,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
 export default function MenuBar() {
   const classes = useStyles();
   let { URLRoomName } = useParams();
+  let query = useQuery();
 
   if (!URLRoomName) {
-    URLRoomName = window.sessionStorage.getItem('room') || '';
+    URLRoomName = window.sessionStorage.getItem('room') || query.get('room') || '';
   }
 
-  const URLUserName = window.sessionStorage.getItem('user') || '';
+  const URLUserName = window.sessionStorage.getItem('user') || query.get('user') || '';
 
   const { user, getToken } = useAppState();
   const { isConnecting, connect } = useVideoContext();

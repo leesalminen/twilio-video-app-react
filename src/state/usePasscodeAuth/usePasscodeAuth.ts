@@ -71,8 +71,16 @@ export default function usePasscodeAuth() {
 
   useEffect(() => {
     const passcode = getPasscode();
-    const room = getRoomName();
     const user = getUserName();
+    const room = getRoomName();
+
+    if (user) {
+      window.sessionStorage.setItem('user', user);
+    }
+
+    if (room) {
+      window.sessionStorage.setItem('room', room);
+    }
 
     if (passcode) {
       verifyPasscode(passcode)
@@ -80,14 +88,6 @@ export default function usePasscodeAuth() {
           if (verification?.isValid) {
             setUser({ passcode } as any);
             window.sessionStorage.setItem('passcode', passcode);
-
-            if (user) {
-              window.sessionStorage.setItem('user', user);
-            }
-
-            if (room) {
-              window.sessionStorage.setItem('room', room);
-            }
 
             history.replace(window.location.pathname);
           }
